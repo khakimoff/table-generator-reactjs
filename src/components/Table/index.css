@@ -1,0 +1,19 @@
+tr:nth-child(odd) {
+  background-color: #ffffff; /* Цвет фона для четных строк */
+}
+
+tr:nth-child(even) {
+  background-color: #fafbfc; /* Цвет фона для нечетных строк */
+}
+
+table {
+  border-collapse: collapse; /* Объединяем границы ячеек */
+  width: 1120px;
+  margin-bottom: 30px;
+}
+
+td,
+th {
+  border: none;
+  padding: 15px;
+}

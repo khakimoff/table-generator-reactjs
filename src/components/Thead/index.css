@@ -1,0 +1,11 @@
+thead {
+  background: #fafbfc;
+}
+
+thead > tr {
+  background-color: #fafbfc !important;
+}
+
+th {
+  text-transform: capitalize;
+}

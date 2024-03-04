@@ -1,0 +1,15 @@
+.wraper-select {
+  position: relative;
+  flex-basis: 120px;
+}
+
+.wraper-select__item {
+  padding: auto 12;
+  height: 40px;
+  cursor: pointer;
+  background-color: #fff;
+  width: 170px;
+  font-size: 13px;
+  border: 1px solid #ebeef0;
+  border-radius: 5px;
+}
