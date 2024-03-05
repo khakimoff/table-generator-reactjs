@@ -70,6 +70,10 @@
 }
 
 .modal__body label {
+  display: grid;
+}
+
+.modal__body span {
   font-size: 11px;
   color: #8f99a9;
   padding-bottom: 7px;

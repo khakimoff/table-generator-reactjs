@@ -36,14 +36,16 @@ export const Modal = ({
           </div>
         </div>
         <div className="modal__body">
-          <label>{name}</label>
-          <Input
-            value={editValue}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setEditValue(e.target.value)
-            }
-            placeholder="To enter value"
-          />
+          <label>
+            <span>{name}</span>
+            <Input
+              value={editValue}
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setEditValue(e.target.value)
+              }
+              placeholder="To enter value"
+            />
+          </label>
         </div>
         <div className="modal__bottom">
           <Button onClick={saveEdit} title="Save" />
