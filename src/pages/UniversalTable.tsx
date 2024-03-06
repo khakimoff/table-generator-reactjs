@@ -1,17 +1,21 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 
 import { Table } from '../components/Table';
 import Filter from '../components/Filter/Filter';
 import { Modal } from '../components/Modal';
 
-interface IUniversalTable {
-  data: object[];
+export interface CommonItem {
+  id: number;
+  [key: string]: unknown;
+}
+export interface UniversalTable {
+  data: CommonItem[];
 }
 
-function UniversalTable({ data }: IUniversalTable) {
-  const [originalData, setOriginalData] = useState<object[]>(data);
-  const [filteredData, setFilteredData] = useState<object[]>(data);
+function UniversalTable({ data }: UniversalTable) {
+  const [originalData, setOriginalData] = useState<CommonItem[]>(data);
+  const [filteredData, setFilteredData] = useState<CommonItem[]>(data);
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [editValue, setEditValue] = useState<string>('');
   const [selectedRowIndex, setSelectedRowIndex] = useState<number>(-1);
@@ -21,9 +25,12 @@ function UniversalTable({ data }: IUniversalTable) {
     setFilteredData(data); // update filter data if change props
   }, [data]);
 
-  const applyFilter = (filtered: Array<object>) => {
-    setFilteredData(filtered);
-  };
+  const applyFilter = useCallback(
+    (filtered: CommonItem[]) => {
+      setFilteredData(filtered);
+    },
+    [setFilteredData]
+  );
 
   const openModal = (value: string, rowIndex: number) => {
     setIsOpenModal(true);
@@ -33,17 +40,19 @@ function UniversalTable({ data }: IUniversalTable) {
 
   const saveEdit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    const updatedData = [...originalData]; // use original data for update
+    const updatedData = [...originalData];
     const textFieldKey = Object.keys(updatedData[selectedRowIndex]).find(
-      (key) => typeof updatedData[selectedRowIndex][key] === 'string'
+      (key) =>
+        typeof updatedData[selectedRowIndex][key] === 'string' ||
+        typeof updatedData[selectedRowIndex][key] === 'number' // Могут быть и числовые свойства
     );
     if (textFieldKey) {
       updatedData[selectedRowIndex] = {
         ...updatedData[selectedRowIndex],
         [textFieldKey]: editValue,
       };
-      setOriginalData(updatedData); // update filter data
-      setFilteredData(updatedData); // update filter data
+      setOriginalData(updatedData);
+      setFilteredData(updatedData);
     }
     setIsOpenModal(false);
   };

@@ -4,11 +4,12 @@ import { Select } from '../Select';
 import { Button } from '../Button';
 import filterImg from '../../assets/filter.png';
 import './index.css';
+import { CommonItem } from '../../pages/UniversalTable';
 
 interface FulterProps {
-  data: object[];
-  originalData: object[];
-  applyFilter: (filtered: object[]) => void;
+  data: CommonItem[];
+  originalData: CommonItem[];
+  applyFilter: (filtered: CommonItem[]) => void;
 }
 interface Filters {
   text: string;
@@ -20,7 +21,7 @@ function Filter({ data, originalData, applyFilter }: FulterProps) {
     text: '',
     booleanField: undefined,
   });
-  const [filteredData, setFilteredData] = useState<object[]>(data);
+  const [filteredData, setFilteredData] = useState<CommonItem[]>(data);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilters({ ...filters, text: e.target.value });

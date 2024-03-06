@@ -20,5 +20,3 @@ export const renderCell = (data: object[]) => {
   }
   return String(data);
 };
-
-// Курировать

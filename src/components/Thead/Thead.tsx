@@ -4,7 +4,7 @@ import { Empty } from '../Empty';
 import './index.css';
 
 interface TheadProps {
-  data: Array<string>;
+  data: string[];
 }
 
 export const Thead = ({ data }: TheadProps) => {

@@ -4,10 +4,12 @@ import { Button } from '../Button';
 import { Empty } from '../Empty';
 import { renderCell } from '../../utils';
 
+type OpenModalFunction = (value: string, rowIndex: number) => void;
 interface TbodyProps {
   data: object[];
-  openModal: (value: string, rowIndex: number) => void;
+  openModal: OpenModalFunction;
 }
+
 export const Tbody = ({ data, openModal }: TbodyProps) => {
   if (!data.length) {
     return <Empty title="No data" />;

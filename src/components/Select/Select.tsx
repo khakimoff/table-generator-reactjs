@@ -2,12 +2,13 @@ import { v4 as uuidv4 } from 'uuid';
 
 import React from 'react';
 import './index.css';
+import { CommonItem } from '../../pages/UniversalTable';
 
 interface SelectProps {
   value: string;
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   options: string[];
-  data: object[];
+  data: CommonItem[];
 }
 
 export const Select = ({ value, onChange, options, data }: SelectProps) => {
