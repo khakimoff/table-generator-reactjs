@@ -43,9 +43,7 @@ function UniversalTable({ data }: UniversalTable) {
     const updatedData = [...originalData];
     const textFieldKey = Object.keys(updatedData[selectedRowIndex]).find(
       (key) =>
-        typeof updatedData[selectedRowIndex][key] === 'string' ||
-        typeof updatedData[selectedRowIndex][key] === 'number'
-    );
+        typeof updatedData[selectedRowIndex][key] === 'string');
     if (textFieldKey) {
       updatedData[selectedRowIndex] = {
         ...updatedData[selectedRowIndex],
