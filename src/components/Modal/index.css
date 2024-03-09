@@ -3,14 +3,12 @@
   display: grid;
   grid-template-rows: 1fr 2fr 1fr;
   gap: 30px;
-
   background-color: white;
   width: 100%;
   max-width: 400px;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  opacity: 0;
   transform: translateY(-50px);
   transition:
     opacity 0.3s ease,
@@ -96,25 +94,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  opacity: 0;
-  visibility: hidden;
-  transition:
-    opacity 0.3s ease,
-    visibility 0s linear 0.3s;
-}
-
-.modal-overlay.active {
-  opacity: 1;
-  visibility: visible;
-  transition:
-    opacity 0.3s ease,
-    visibility 0s linear;
-}
-
-.modal-overlay.active .modal {
-  opacity: 1;
   transform: translateY(0);
-  transition:
-    opacity 0.3s ease,
-    transform 0.3s ease;
+  opacity: 1;
 }

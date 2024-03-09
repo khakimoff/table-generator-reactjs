@@ -4,6 +4,7 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import { Table } from '../components/Table';
 import Filter from '../components/Filter/Filter';
 import { Modal } from '../components/Modal';
+import { PortalHOC } from '../hoc/PortalHOC';
 
 export interface CommonItem {
   id: number;
@@ -16,7 +17,7 @@ export interface UniversalTable {
 function UniversalTable({ data }: UniversalTable) {
   const [originalData, setOriginalData] = useState<CommonItem[]>(data);
   const [filteredData, setFilteredData] = useState<CommonItem[]>(data);
-  const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+  const [isOpenPortal, setIsOpenPortal] = useState<boolean>(false);
   const [editValue, setEditValue] = useState<string>('');
   const [selectedRowIndex, setSelectedRowIndex] = useState<number>(-1);
 
@@ -33,7 +34,7 @@ function UniversalTable({ data }: UniversalTable) {
   );
 
   const openModal = (value: string, rowIndex: number) => {
-    setIsOpenModal(true);
+    setIsOpenPortal(true);
     setEditValue(value);
     setSelectedRowIndex(rowIndex);
   };
@@ -42,8 +43,8 @@ function UniversalTable({ data }: UniversalTable) {
     e.preventDefault();
     const updatedData = [...originalData];
     const textFieldKey = Object.keys(updatedData[selectedRowIndex]).find(
-      (key) =>
-        typeof updatedData[selectedRowIndex][key] === 'string');
+      (key) => typeof updatedData[selectedRowIndex][key] === 'string'
+    );
     if (textFieldKey) {
       updatedData[selectedRowIndex] = {
         ...updatedData[selectedRowIndex],
@@ -52,10 +53,10 @@ function UniversalTable({ data }: UniversalTable) {
       setOriginalData(updatedData);
       setFilteredData(updatedData);
     }
-    setIsOpenModal(false);
+    setIsOpenPortal(false);
   };
 
-  useHotkeys('esc', () => setIsOpenModal(false));
+  useHotkeys('esc', () => setIsOpenPortal(false));
 
   return (
     <>
@@ -69,15 +70,16 @@ function UniversalTable({ data }: UniversalTable) {
         bodyData={filteredData}
         openModal={openModal}
       />
-      <Modal
-        isOpenModal={isOpenModal}
-        title="Edit"
-        setIsOpenModal={setIsOpenModal}
-        name="Name"
-        editValue={editValue}
-        setEditValue={setEditValue}
-        saveEdit={saveEdit}
-      />
+      <PortalHOC isOpenPortal={isOpenPortal}>
+        <Modal
+          setIsOpenPortal={setIsOpenPortal}
+          title="Edit"
+          name="Name"
+          editValue={editValue}
+          setEditValue={setEditValue}
+          saveEdit={saveEdit}
+        />
+      </PortalHOC>
     </>
   );
 }

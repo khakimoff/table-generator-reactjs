@@ -4,9 +4,8 @@ import { Button } from '../Button';
 import './index.css';
 
 interface ModalProps {
-  isOpenModal: boolean;
   title: string;
-  setIsOpenModal: (isOpen: boolean) => void;
+  setIsOpenPortal: (value: boolean) => void;
   name: string;
   editValue: string;
   setEditValue: (value: string) => void;
@@ -14,22 +13,21 @@ interface ModalProps {
 }
 
 export const Modal = ({
-  isOpenModal,
   title,
-  setIsOpenModal,
+  setIsOpenPortal,
   name,
   editValue,
   setEditValue,
   saveEdit,
 }: ModalProps) => {
   return (
-    <form className={`modal-overlay ${isOpenModal ? 'active' : ''}`}>
+    <form className="modal-overlay">
       <div className="modal">
         <div className="modal__header">
           <h3>{title}</h3>
           <div
             className="modal__header block"
-            onClick={() => setIsOpenModal(false)}
+            onClick={() => setIsOpenPortal(false)}
           >
             <p>(Esc)</p>
             <div className="block__close"></div>
