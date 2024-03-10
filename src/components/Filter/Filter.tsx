@@ -36,10 +36,10 @@ const Filter = memo(({ data, originalData, applyFilter }: FulterProps) => {
     const filtered = filteredData.filter((item) => {
       const textMatch = filters.text
         ? Object.values(item).some(
-          (val) =>
-            typeof val === 'string' &&
-            val.toLowerCase().includes(filters.text.toLowerCase())
-        )
+            (val) =>
+              typeof val === 'string' &&
+              val.toLowerCase().includes(filters.text.toLowerCase())
+          )
         : true;
       const booleanMatch = filters.booleanField
         ? item[filters.booleanField] === true
@@ -79,6 +79,6 @@ const Filter = memo(({ data, originalData, applyFilter }: FulterProps) => {
       />
     </form>
   );
-})
+});
 
 export default Filter;

@@ -1,19 +1,12 @@
 import { Portal } from 'react-portal';
 
 interface PortalHOCProps {
-    isOpenPortal?: boolean;
-    children: React.ReactNode
+  isOpenPortal?: boolean;
+  children: React.ReactNode;
 }
 
-export const PortalHOC = ({
-    isOpenPortal,
-    children
-}: PortalHOCProps) => {
-    if (!isOpenPortal) return null;
+export const PortalHOC = ({ isOpenPortal, children }: PortalHOCProps) => {
+  if (!isOpenPortal) return null;
 
-    return (
-        <Portal>
-            {children}
-        </Portal>
-    );
+  return <Portal>{children}</Portal>;
 };
