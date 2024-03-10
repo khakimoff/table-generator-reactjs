@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { Input } from '../Input';
 import { Select } from '../Select';
 import { Button } from '../Button';
@@ -16,7 +16,7 @@ interface Filters {
   booleanField: string | undefined;
 }
 
-function Filter({ data, originalData, applyFilter }: FulterProps) {
+const Filter = memo(({ data, originalData, applyFilter }: FulterProps) => {
   const [filters, setFilters] = useState<Filters>({
     text: '',
     booleanField: undefined,
@@ -36,10 +36,10 @@ function Filter({ data, originalData, applyFilter }: FulterProps) {
     const filtered = filteredData.filter((item) => {
       const textMatch = filters.text
         ? Object.values(item).some(
-            (val) =>
-              typeof val === 'string' &&
-              val.toLowerCase().includes(filters.text.toLowerCase())
-          )
+          (val) =>
+            typeof val === 'string' &&
+            val.toLowerCase().includes(filters.text.toLowerCase())
+        )
         : true;
       const booleanMatch = filters.booleanField
         ? item[filters.booleanField] === true
@@ -79,6 +79,6 @@ function Filter({ data, originalData, applyFilter }: FulterProps) {
       />
     </form>
   );
-}
+})
 
 export default Filter;
